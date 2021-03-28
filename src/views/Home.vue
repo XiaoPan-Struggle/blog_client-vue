@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-
+    <el-button type="primary">确定</el-button>
   </div>
 </template>
 
