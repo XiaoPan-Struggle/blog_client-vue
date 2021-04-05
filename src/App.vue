@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
-body,h1,h2,h3,h4,h5{
+body,h1,h2,h3,h4,h5,figure{
   padding: 0;
   margin: 0;
 }
@@ -43,7 +43,7 @@ html,body,#app{
   }
   #main{
     grid-area: main;
-    background-color: #8accc8;
+    background-color: #eae5d2;
   }
   #footer{
     grid-area: footer;
