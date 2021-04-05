@@ -1,28 +1,55 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Header id="header" />
+    <main id="main">
+      <router-view/>
+    </main>
+    <Footer id="footer" />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script lang="js">
+import Header from '@/components/header';
+import Footer from '@/components/footer';
+export default {
+  components: {
+    Header,
+    Footer
   }
+}
+</script>
+
+<style lang="scss">
+body,h1,h2,h3,h4,h5{
+  padding: 0;
+  margin: 0;
+}
+main{
+  background-color: #8accc8;
+}
+*{
+  box-sizing: border-box;
+}
+#app {
+  background-color: #fafafa;
+  display: grid;
+  grid-template-columns: 12% auto 12%;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "header header header"
+                       ". main ."
+                       "footer footer footer" ;
+  #header {
+    grid-area: header;
+  }
+  #main{
+    grid-area: main;
+  }
+  #footer{
+    grid-area: footer;
+  }
+}
+a {
+  font-weight: bold;
+  text-decoration: none;
 }
 </style>
