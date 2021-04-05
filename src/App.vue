@@ -24,11 +24,11 @@ body,h1,h2,h3,h4,h5{
   padding: 0;
   margin: 0;
 }
-main{
-  background-color: #8accc8;
-}
 *{
   box-sizing: border-box;
+}
+html,body,#app{
+  height: 100%;
 }
 #app {
   background-color: #fafafa;
@@ -43,6 +43,7 @@ main{
   }
   #main{
     grid-area: main;
+    background-color: #8accc8;
   }
   #footer{
     grid-area: footer;
