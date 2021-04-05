@@ -9,9 +9,10 @@
 div {
   padding: 20px;
   background-color: #136e80;
+  text-align: center;
 
   a {
-    color: #888;
+    color: #eee;
   }
 }
 </style>
