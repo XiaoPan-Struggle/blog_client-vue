@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="main">
     <h2 id="h2">BLOG SHARE</h2>
     <nav id="nav">
       <router-link to="/login">
@@ -13,13 +13,10 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: 'header'
-};
 </script>
 
 <style lang="scss" scoped>
-  .header{
+  .main{
     padding: 40px;
     display: grid;
     grid-template-columns: 40% 20% 40%;
