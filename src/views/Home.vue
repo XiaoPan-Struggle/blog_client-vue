@@ -3,7 +3,7 @@
     <section class="blog-posts">
       <div class="item">
         <figure class="avatar">
-          <img src="" alt="">
+          <img src="http://cn.gravatar.com/avatar/1?s=128&d=identicon" alt="">
           <figcaption>小潘</figcaption>
         </figure>
         <h3>前端异步大揭秘 <span>3天前</span></h3>
