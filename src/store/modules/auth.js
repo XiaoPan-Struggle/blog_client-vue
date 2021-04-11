@@ -5,7 +5,10 @@ export default {
     user: null,
     isLogin: false
   },
-  getters: {},
+  getters: {
+    user: state => state.user,
+    isLogin: state => state.isLogin
+  },
   mutations: {
     setUser(state, payload) {
       state.user = payload.user
@@ -31,8 +34,11 @@ export default {
     },
 
     async checkLogin({commit, state}) {
+      console.log(1);
       if (state.isLogin) return true
+      console.log(2);
       let res = await auth.getInfo()
+      console.log(3);
       commit('setLogin', {isLogin: res.isLogin})
       if (!res.isLogin) return false
       commit('setUser', {user: res.data})
@@ -40,6 +46,7 @@ export default {
     },
 
     async logout({commit}) {
+      console.log(1);
       await auth.logout()
       commit('setLogin', {isLogin: false})
       commit('setUser', {user: null})

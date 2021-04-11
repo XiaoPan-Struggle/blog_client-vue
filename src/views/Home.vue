@@ -16,8 +16,10 @@
 </template>
 
 <script>
-// import request from '@/helpers/request';
-// import auth from '@/api/auth';
+import request from '@/helpers/request';
+import auth from '@/api/auth';
+window.request = request
+window.auth = auth
 
 export default {
   name: 'Home',
