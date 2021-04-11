@@ -32,7 +32,6 @@
           <a href="#">删除</a>
         </div>
       </div>
-
     </section>
   </div>
 </template>
