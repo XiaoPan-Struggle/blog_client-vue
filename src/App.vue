@@ -31,7 +31,6 @@ html,body,#app{
   height: 100%;
 }
 #app {
-  background-color: #fafafa;
   display: grid;
   grid-template-columns: 12% auto 12%;
   grid-template-rows: auto 1fr auto;
