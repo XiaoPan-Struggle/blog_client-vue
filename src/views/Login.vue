@@ -18,8 +18,8 @@ export default {
   name: 'Login',
   data() {
     return {
-      username: '',
-      password: null
+      username: 'hahaha',
+      password: '123456'
     };
   },
   methods: {
@@ -27,13 +27,10 @@ export default {
         'login'
     ]),
     onLogin() {
-      console.log(1);
       this.login({username:this.username,password:this.password})
         .then(() => {
-          this.$router.push({path: '/'})
+          this.$router.push({path: this.$route.query.redirect || '/'})
         })
-      console.log(this.username);
-      console.log(this.password);
     }
   }
 };

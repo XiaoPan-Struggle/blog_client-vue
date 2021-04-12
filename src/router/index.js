@@ -8,51 +8,77 @@ import Edit from '@/views/Edit.vue'
 import My from '@/views/My.vue'
 import Register from '@/views/Register.vue'
 import User from '@/views/User.vue'
+import store from '@/store'
 
+window.store = store
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/',
+    path: '/',
+    // component: Home
     redirect: '/home'
-  },
-  {
-    path:'/home',
-    component: Home
   },
   {
     path: '/login',
     component: Login
   },
   {
-    path: '/create',
-    component: Create
-  },
-  {
-    path: '/detail',
-    component: Detail
-  },
-  {
-    path: '/edit',
-    component: Edit
-  },
-  {
-    path: '/my',
-    component: My
-  },
-  {
     path: '/register',
     component: Register
   },
   {
-    path: '/user',
+    path: '/home',
+    component: Home
+  },
+  {
+    path: '/create',
+    component: Create,
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/detail/:blogId',
+    component: Detail
+  },
+  {
+    path: '/edit/:blogId',
+    component: Edit,
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/my',
+    component: My,
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/user/:userId',
     component: User
   }
 ]
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    store.dispatch('checkLogin')
+      .then(isLogin => {
+        // 需要验证的路由
+        if (!isLogin) {
+          // 是否登录
+          next({
+            path: '/login',
+            query: {redirect: to.fullPath}
+          })
+        } else {
+          next()
+        }
+      })
+  } else {
+    next() // 确保一定要调用 next()
+  }
 })
 
 export default router
