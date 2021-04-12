@@ -1,18 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-import Login from '@/views/Login.vue'
-import Create from '@/views/Create.vue'
-import Detail from '@/views/Detail.vue'
-import Edit from '@/views/Edit.vue'
-import My from '@/views/My.vue'
-import Register from '@/views/Register.vue'
-import User from '@/views/User.vue'
 import store from '@/store'
 
-window.store = store
-
 Vue.use(VueRouter)
+
+const Home = () => import('@/views/Home')
+const Login = () => import('@/views/Login')
+const Register = () => import('@/views/Register')
+const Create = () => import('@/views/Create')
+const Detail = () => import('@/views/Detail')
+const My = () => import('@/views/My')
+const Edit = () => import('@/views/Edit')
+const User = () => import('@/views/User')
 
 const routes = [
   {
@@ -66,15 +65,16 @@ router.beforeEach((to, from, next) => {
     store.dispatch('checkLogin')
       .then(isLogin => {
         // 需要验证的路由
-        if (!isLogin) {
-          // 是否登录
-          next({
-            path: '/login',
-            query: {redirect: to.fullPath}
-          })
-        } else {
+        if (isLogin) {
           next()
         }
+      })
+      .catch(() => {
+        // 是否登录
+        next({
+          path: '/login',
+          query: {redirect: to.fullPath}
+        })
       })
   } else {
     next() // 确保一定要调用 next()

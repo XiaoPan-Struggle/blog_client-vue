@@ -43,10 +43,10 @@ export default {
     },
 
     async logout({commit}) {
-      localStorage.setItem('token','')
       await auth.logout()
       commit('setLogin', {isLogin: false})
       commit('setUser', {user: null})
+      localStorage.setItem('token','')
     }
   }
 }
