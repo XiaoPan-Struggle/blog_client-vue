@@ -34,11 +34,8 @@ export default {
     },
 
     async checkLogin({commit, state}) {
-      console.log(1);
       if (state.isLogin) return true
-      console.log(2);
       let res = await auth.getInfo()
-      console.log(3);
       commit('setLogin', {isLogin: res.isLogin})
       if (!res.isLogin) return false
       commit('setUser', {user: res.data})
@@ -46,7 +43,7 @@ export default {
     },
 
     async logout({commit}) {
-      console.log(1);
+      localStorage.setItem('token','')
       await auth.logout()
       commit('setLogin', {isLogin: false})
       commit('setUser', {user: null})

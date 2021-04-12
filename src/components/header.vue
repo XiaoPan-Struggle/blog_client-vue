@@ -9,11 +9,9 @@
           </router-link>
         </router-link>
         <router-link to="/register">
-
           <router-link to="/register">
             <el-button type="primary">注册账号</el-button>
           </router-link>
-
         </router-link>
       </nav>
     </template>
@@ -129,7 +127,6 @@ a {
           padding: 10px;
           font-size: 12px;
           color: #f60;
-
         }
       }
     }
