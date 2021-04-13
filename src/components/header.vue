@@ -16,15 +16,20 @@
       </nav>
     </template>
     <template v-if="isLogin">
-      <h1>BLOG SHARE</h1>
+      <h1><router-link to="/home">BLOG SHARE</router-link></h1>
       <i class="edit"></i>
       <div class="user">
         <img class="avatar" :src="user.avatar" :alt="user.username" :title="user.username">
-        <ul>
+        <ul style="z-index: 10">
           <li>
-            <router-link to="my">我的</router-link>
+            <router-link to="/create">创建</router-link>
           </li>
-          <li><a href="#" @click="onLogout">退出</a></li>
+          <li>
+            <router-link to="/my">我的</router-link>
+          </li>
+          <li>
+            <a href="#" @click="onLogout">退出</a>
+          </li>
         </ul>
       </div>
     </template>
@@ -45,7 +50,7 @@ export default {
     ])
   },
   created() {
-    // this.checkLogin();
+    this.checkLogin();
   },
   methods: {
     ...mapActions([

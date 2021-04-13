@@ -62,14 +62,17 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log(1);
     store.dispatch('checkLogin')
       .then(isLogin => {
+        console.log(2);
         // 需要验证的路由
         if (isLogin) {
           next()
         }
       })
       .catch(() => {
+        console.log(3);
         // 是否登录
         next({
           path: '/login',
@@ -77,6 +80,7 @@ router.beforeEach((to, from, next) => {
         })
       })
   } else {
+    console.log(4);
     next() // 确保一定要调用 next()
   }
 })

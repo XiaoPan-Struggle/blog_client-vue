@@ -1,30 +1,66 @@
 <template>
   <div class="home">
     <section class="blog-posts">
-      <div class="item">
+      <router-link :to="`/detail/${blog.id}`" class="item" v-for="blog in blogs" :key="blog.id">
         <figure class="avatar">
-          <img src="http://cn.gravatar.com/avatar/1?s=128&d=identicon" alt="">
-          <figcaption>小潘</figcaption>
+          <img :src="blog.user.avatar" :title="blog.user.username">
+          <figcaption>{{blog.user.username}}</figcaption>
         </figure>
-        <h3>前端异步大揭秘 <span>3天前</span></h3>
-        <p>本文以一个简单的文件读写为例，讲解了异步的不同写法，包括普通的 callback，ES2016中的Promise和
-        Generator，Node用于解决回调co 模块，ES2017中的async/await，适合初步接触 Node.js以及少量的
-        ES6语法的同学阅读。。。</p>
-      </div>
+        <h3>{{blog.title}} <span>3天前</span></h3>
+        <p>{{ blog.description}}</p>
+      </router-link>
+    </section>
+    <section class="pagination">
+      <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="prev, pager, next"
+          :current-page.sync="page"
+          :page-size="20"
+          :total="total">
+      </el-pagination>
     </section>
   </div>
 </template>
 
 <script>
-import request from '@/helpers/request';
 import auth from '@/api/auth';
-window.request = request
+import blog from '@/api/blog';
 window.auth = auth
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      blogs: [],
+      total: 0,
+      page: 1
+    }
+  },
   components: {
-
+  },
+  created() {
+    this.page = parseInt(this.$route.query.page) || 1
+    blog.getIndexBlogs({page: this.page})
+      .then(res => {
+        this.blogs = res.data
+        this.total = res.total
+        this.page = res.page
+        console.log(res);
+      })
+  },
+  methods: {
+    handleCurrentChange(val){
+      blog.getIndexBlogs({
+        page: val
+      })
+      .then(res => {
+        this.blogs = res.data
+        this.total = res.total
+        this.page = res.page
+        this.$router.push({path: '/',query: {page: val}})
+      })
+    }
   }
 }
 </script>
@@ -35,7 +71,7 @@ export default {
   .item{
     display: grid;
     grid: auto auto / 80px 1fr;
-    margin: 20px 0;
+    margin: 50px 0;
 
     .avatar{
       grid-column: 1;
@@ -69,8 +105,18 @@ export default {
     p{
       grid-column: 2 / 3;
       grid-row: 2 / 3;
-      margin-top: 0;
+      color: #666;
     }
+  }
+  a{
+    text-decoration: none;
+    color: #333;
+  }
+
+  .pagination {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 20px;
   }
 }
 </style>
