@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import blog from '@/api/blog';
 
 export default {

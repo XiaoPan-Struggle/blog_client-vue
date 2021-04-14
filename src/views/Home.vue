@@ -6,7 +6,7 @@
           <img :src="blog.user.avatar" :title="blog.user.username">
           <figcaption>{{blog.user.username}}</figcaption>
         </figure>
-        <h3>{{blog.title}} <span>3天前</span></h3>
+        <h3>{{blog.title}} <span>{{blog.createdAt}}</span></h3>
         <p>{{ blog.description}}</p>
       </router-link>
     </section>
