@@ -5,7 +5,7 @@ const URL = {
   GET_DETAIL : '/blog/:blogId',
   CREATE: '/blog',
   UPDATE: '/blog/:blogId',
-  DELETE: '/blog:blogId',
+  DELETE: '/blog/:blogId',
 }
 
 export default {
